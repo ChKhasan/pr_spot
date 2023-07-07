@@ -237,6 +237,7 @@ export default {
     submit() {},
   },
   async mounted() {
+    console.log("sdfsf");
     this.loading = false;
     this.tab = this.$route.query.tab || "myorder";
     this.user =

@@ -181,6 +181,7 @@ export default {
     const [ordersData] = await Promise.all([
       this.$store.dispatch("fetchOrders/getOrders"),
     ]);
+    console.log(ordersData);
     this.loading = false;
     this.user =
       localStorage &&

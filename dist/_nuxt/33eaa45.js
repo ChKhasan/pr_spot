@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{1010:function(n,t,e){"use strict";e.r(t);var o=e(4),r={props:["order"],methods:{moment:e.n(o).a}},c=e(53),component=Object(c.a)(r,(function(){return(0,this._self._c)("div",{staticClass:"order__card"})}),[],!1,null,null,null);t.default=component.exports}}]);

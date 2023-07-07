@@ -109,7 +109,7 @@
               </div>
             </div>
           </div> -->
-          <OrderCard v-for="order in orders" :key="order?.id" :order="order" />
+          <CardsOrderCard v-for="order in orders" :key="order?.id" :order="order" />
         </div>
         <div v-if="orders.length" class="all_ads dv">
           <nuxt-link to="/order" tag="button">Все заказы</nuxt-link>
@@ -178,6 +178,9 @@ export default {
     };
   },
   async mounted() {
+    const [ordersData] = await Promise.all([
+      this.$store.dispatch("fetchOrders/getOrders"),
+    ]);
     this.loading = false;
     this.user =
       localStorage &&

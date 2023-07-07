@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="order__card">
-    <!-- <div class="form_block mb-16">
+    <div class="form_block mb-16">
       <div class="w-screen flex gap-16">
         <div class="home_order_wimg" v-if="order?.images.length > 3">
           <img
@@ -48,7 +48,7 @@
           </nuxt-link>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 <script>

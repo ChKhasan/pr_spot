@@ -1,0 +1,425 @@
+@media (min-width: 1800px) {
+    .banner .img {
+        width: 612px;
+        position: absolute;
+        height: 600px;
+        right: 89px;
+        bottom: -35px;
+    }
+}
+@media (min-width: 1441px) {
+    .container {
+        padding-left: 144px;
+        padding-right: 144px;
+    }
+}
+@media (max-width: 1441px) {
+    .container {
+        padding-left: 72px;
+        padding-right: 72px;
+    }
+    
+    .apply_users {
+        height: auto;
+    }
+    
+    .accept_org {
+        gap: 16px;
+    }
+    .banner .img {
+        width: 512px;
+        position: absolute;
+        height: 500px;
+        right: 50px;
+        bottom: -40px;
+    }
+}
+@media (max-width: 1280px) {
+    .mv{
+        &_grid-1{
+            grid-template-columns: auto;
+        }
+    }
+    .advertising_organizations{
+        grid-template-columns: auto;
+    }
+    .banner_content {
+        width: 65%;
+        z-index: 2;
+    }
+    .banner .img {
+        width: 362px;
+        position: absolute;
+        height: 350px;
+        right: 30px;
+        bottom: 0px;
+    }
+}
+@media (max-width: 1024px) {
+    .container{
+        padding: 24px;
+    }
+    .navbar {
+        .container{
+            position: relative;
+            z-index: 100;
+        }
+    }
+    .mv_w{
+        width: 345px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .section {
+        margin-top: 70px;
+        padding-top: 6px;
+        &_block{
+            h2{
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 150%;
+            }
+            .public_order{
+                height: 40px;
+                font-size: 14px;
+                img{
+                    width: 16px;
+                }
+            }
+        }
+    }
+    .wall_hr{
+        width: 100%;
+    }
+    .order_img{
+        gap: 4px;
+        img{
+        width: 101px;
+        height: 101px;
+        }
+    }
+    .menu-mobile {
+        a {
+            visibility: hidden;
+        }
+        &.menu_mobile {
+            visibility: visible;
+            a{
+                visibility: visible;
+                transform: scaleY(1);
+            }
+        }
+    }
+    .box--lg{
+        width: 345px;
+        padding: 32px;
+        height: 277px;
+    }
+    .banner{
+     background-size: contain;
+     margin: 0 auto;
+     width: 345px;   
+     height: 542px;
+     padding: 42px 24px;
+     h2{
+        font-size: 24px;
+        line-height: 30px;
+     }
+     p{
+        font-weight: 400;
+        font-size: 14px;
+        width: 100%;
+     }
+     &_logo{
+        height: 17px;
+     }
+     &_content {
+        width: 100%;
+     }
+     .img {
+        width: 100%;
+        height: 250px;
+        right: 0;
+     }
+     button {
+        width: 100%;
+        height: 48px;
+     }
+    }
+    .home_services{
+        width: 345px;
+        margin: 0 auto;
+        &_block{
+            display: grid;
+            grid-template-columns: auto auto;
+            margin-top: 40px;
+            gap: 5px;
+        }
+        &_card{
+            width: 100%;
+            padding: 16px;
+            height: 161px;
+            img{
+                width: 40px;
+                height: 40px;
+            }
+            h3{
+                font-weight: 600;
+                font-size: 16px;
+            }
+            p {
+                font-weight: 400;
+                font-size: 14px;
+            }
+        }
+    }
+    .publication_date{
+        span,p{
+            font-size: 12px;
+        }
+    }
+    .mv_w-screen{
+        width: 100%;
+    }
+    .mv_justify-between{
+        justify-content: space-between;
+    }
+    .profile_status{
+        width: 100%;
+        height: 33px;
+        margin-top: 16px;
+        justify-content: center;
+    }
+    .public_order{
+        margin-top: 40px;
+        height: 48px;
+    }
+    .dv{
+        display: none !important;
+    }
+    .breadcrubms {
+        margin-bottom: 0;
+        a,span{
+            font-size: 12px;
+        }
+    }
+    .form {
+        h3 {
+            font-size: 24px;
+        }
+        h6{
+            font-size: 18px;
+        }
+    }
+    .mv{
+        display: flex !important;
+        justify-content: space-between;
+        &_items-start{
+            align-items: flex-start;
+        }
+        &_mt-4{
+            margin-top:4px;
+        }
+        &_sign{
+            border: none;
+            height: 37px;
+        }
+        &_flex-wrap{
+            flex-wrap: wrap;
+        }
+        &_gap-16{
+            gap:16px;
+        }
+        &_gap-12{
+            gap:12px;
+        }
+        &_gap-4{
+            gap:4px;
+        }
+        &_gap-0{
+            gap:0;
+        }
+        .mv_logo{
+            display: flex;
+            align-items: center;
+            height: 21px;
+            img{
+                height: 21px;
+            }
+        }
+        button{
+            background: transparent;
+            border: 0;
+            outline: 0;
+            display: flex;
+        }
+        &_flex-col{
+            flex-direction: column;
+        }
+        &_flex-col-rev{
+            flex-direction: column-reverse;
+        }
+        &_w-screen{
+            width: 100%;
+        }
+        &_mt-16{
+            margin-top: 16px;
+        }
+        &_mt-18{
+            margin-top: 18px;
+        }
+        &_mt-24{
+            margin-top: 24px;
+        }
+        &_font-12{
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+        }
+    }
+    
+    .order{
+        grid-template-columns:auto;
+        &s{
+            margin: 0 auto;
+            width: 345px;
+        }
+        &_top{
+            width: 100%;
+            input {
+                width: 100%;
+            }
+        }
+    }
+    .form_order_info_label{
+        font-size: 16px;
+    }
+    .form_other_info {
+        &_label{
+            height: 100px;
+        }
+        &_multifile {
+            label{
+                font-size: 12px;
+                img {
+                    height: 100px;
+                }
+            }
+        }
+        label{
+            font-size: 14px;
+            img {
+                width: 17px;
+                height: 17px;
+            }
+        }
+        p{
+            font-size: 12px !important;
+        }
+    }
+    .home_order{
+        justify-content: space-between;
+        margin-bottom: 20px;
+        width: 345px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .form_block {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 16px;
+        .category_img {
+            width: 72px;
+            height: 72px;
+        }
+    }
+    .advertising_organizations
+    {
+        &_card{
+            padding: 16px;
+            button {
+                margin-top: 16px;
+                height: 44px;
+            }
+            .mv {
+                margin-top: 11px;
+                a,span{
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    font-size: 12px;
+                    img{
+                        width: 15px;
+                    }
+                }
+            }
+        }
+        &_content{
+            .org_logo{
+                width: 72px;
+                height: 72px;
+            }
+            &_text {
+                p{
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    .profil_tab {
+        button {
+            font-size: 14px;
+            .icon{
+                width: 20px;
+            }
+        }
+    }
+    
+    .accept{
+        .show_text{
+        font-size: 12px;
+        color: white;
+        }
+    }
+    
+  .form_other_info_multifile img{
+    height: 100px;
+  }
+}
+@media (max-width: 900px) {
+    .form_other_info {
+        &_multifile {
+            grid-template-columns: 32.3% 32.3% 32.3%;
+        }
+    }
+  .sm {
+    &_flex-col {
+        flex-direction: column;
+    }
+    &_gap-48 {
+        gap: 48px;
+    }
+  }
+  .footer{
+    height: auto;
+    &-menu{
+        flex-direction: column;
+        gap: 48px;
+        align-items: center;
+        a{
+            width: max-content;
+        }
+    }
+    &-cer{
+        flex-direction: column-reverse;
+        gap: 18px;
+    }
+    &-dev{
+        justify-content: center;
+    }
+  }
+}
+@media (max-width: 414px) {
+  
+}

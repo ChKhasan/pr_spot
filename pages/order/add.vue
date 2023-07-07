@@ -303,7 +303,6 @@ export default {
   },
   methods: {
     submit() {
-      console.log(this.$refs);
       this.form.images = this.imagesData.map((item, index) => {
         return {
           image: item.response.upload_url,

@@ -158,8 +158,6 @@
 </template>
 
 <script>
-import OrderCard from "../components/cards/orderCard.vue";
-
 import moment from "moment";
 export default {
   data() {
@@ -187,6 +185,5 @@ export default {
       JSON.parse(localStorage.getItem("user"));
     this.loading = true;
   },
-  components: { OrderCard },
 };
 </script>

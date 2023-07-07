@@ -96,11 +96,10 @@
   </div>
 </template>
 <script>
-import OrderCard from "../../components/cards/orderCard.vue";
 import Loader from "@/components/Loader.vue";
 import moment from "moment";
 export default {
-  components: { Loader, OrderCard },
+  components: { Loader },
   data() {
     return {
       mynomer: null,

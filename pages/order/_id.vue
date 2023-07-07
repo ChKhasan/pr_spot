@@ -248,12 +248,11 @@
   </div>
 </template>
 <script>
-import OrderCard from "../../components/cards/orderCard.vue";
 import { required } from "vuelidate/lib/validators";
 import Icons from "@/components/icons.vue";
 import moment from "moment";
 export default {
-  components: { Icons, OrderCard },
+  components: { Icons },
   data() {
     return {
       mynomer: null,

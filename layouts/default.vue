@@ -1,7 +1,9 @@
 <template>
   <div class="layout__container">
     <Navbar />
-    <Nuxt />
+    <main style="flex: 1 1 auto">
+      <Nuxt />
+    </main>
     <Footer />
   </div>
 </template>
@@ -45,6 +47,7 @@ export default {
 
 <style scoped>
 .layout__container {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

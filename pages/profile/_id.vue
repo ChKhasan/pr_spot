@@ -75,7 +75,10 @@
           </div>
         </div>
         <div>
-          <div class="flex justify-between items-center mt-40 mb-16">
+          <div
+            class="flex justify-between items-center mt-40 mb-16"
+            v-if="order?.offers.length > 0"
+          >
             <h4 class="mv_w">Заявки</h4>
           </div>
           <div

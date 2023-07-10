@@ -53,7 +53,7 @@
                     <a-upload
                       :disabled="imagesData >= 7"
                       v-if="item.uid == 0"
-                      :class="`${item.uid}`"
+                      :class="`${item.uid} order-add`"
                       action="https://prweb.pythonanywhere.com/api/upload_image"
                       list-type="picture-card"
                       :showUploadList="false"
@@ -438,7 +438,7 @@ export default {
 };
 </script>
 <style lang="css">
-.ant-upload.ant-upload-select-picture-card {
+.order-add .ant-upload.ant-upload-select-picture-card {
   width: 100%;
   cursor: pointer;
   display: flex;
@@ -449,7 +449,7 @@ export default {
   border: 1px solid #ebebeb;
   border-radius: 8px;
 }
-.ant-upload.ant-upload-select-picture-card span {
+.order-add .ant-upload.ant-upload-select-picture-card span {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;

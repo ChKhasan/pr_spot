@@ -1,7 +1,7 @@
 <template>
   <div class="section">
     <div class="container">
-      <div class="form mh-80v" v-if="loading">
+      <div class="form mh-80v" v-if="true">
         <div class="flex mv_w justify-between items-center">
           <h3>Профиль</h3>
         </div>
@@ -115,43 +115,49 @@
         </div>
         <div v-if="tab == 'performer'" class="form_block">
           <h4>Я - Исполнитель</h4>
-          <div class="form_other_info mv_w-screen">
-            <label for="textarea">Название организации</label>
-            <input v-model="form3.name" placeholder="Название организации" />
-          </div>
-          <div class="form_other_info mv_w-screen">
-            <label for="textarea">Номер телефона</label>
-            <input
-              v-model="form3.phoneNumber"
-              v-mask="'+998-##-###-##-##'"
-              placeholder="+998"
-            />
-          </div>
-          <div class="form_other_info mv_w-screen">
-            <label for="textarea">Адрес</label>
-            <input v-model="form3.address" placeholder="Адрес" />
-          </div>
-          <div class="form_other_info gap-8">
-            <label for="textarea">Логотип организации</label>
-            <label class="form_other_info_file" for="file"
-              ><img
-                v-if="img && !$store.state.user.organization?.logotip?.path"
-                class="br-rounded image-f"
-                :src="img"
-                alt="" /><img
-                v-else-if="!img && $store.state.user.organization?.logotip?.path"
-                class="br-rounded image-f"
-                :src="$store.state.user.organization?.logotip?.path"
-                alt="" /><img v-else src="@/assets/svg/addimg.svg" alt=""
-            /></label>
-            <input
-              @change="addImg"
-              id="file"
-              v-show="false"
-              type="file"
-              placeholder="Дополнительная информация"
-            />
-          </div>
+          <a-form-model ref="ruleFormProfile" :model="form" :rules="rules">
+            <div class="form_other_info mv_w-screen">
+              <label for="textarea">Название организации</label>
+              <a-form-model-item class="mb-0 w-100" prop="organization">
+                <input v-model="form.organization" placeholder="Название организации" />
+              </a-form-model-item>
+            </div>
+            <div class="form_other_info mv_w-screen">
+              <label for="textarea">Номер телефона</label>
+              <a-form-model-item class="mb-0 w-100" prop="phone_number">
+                <input
+                  v-model="form.phone_number"
+                  v-mask="'+998-##-###-##-##'"
+                  placeholder="+998"
+                />
+              </a-form-model-item>
+            </div>
+            <div class="form_other_info mv_w-screen">
+              <label for="textarea">Адрес</label>
+              <a-form-model-item class="mb-0 w-100" prop="phone_number">
+                <input v-model="form.address" placeholder="Адрес" />
+              </a-form-model-item>
+            </div>
+            <div class="form_other_info gap-8">
+              <label for="textarea">Логотип организации</label>
+
+              <a-upload
+                action="https://prweb.pythonanywhere.com/api/upload_image"
+                class="profile-upload"
+                list-type="picture-card"
+                :file-list="fileList"
+                @preview="handlePreview"
+                @change="($event) => handleChange($event)"
+              >
+                <div v-if="fileList.length < 1">
+                  <img class="uplaod-svg" src="@/assets/svg/addimg.svg" alt="" />
+                </div>
+              </a-upload>
+              <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
+                <img alt="example" style="width: 100%" :src="previewImage" />
+              </a-modal>
+            </div>
+          </a-form-model>
           <div class="flex justify-between items-center mt-41 w-70 mv_w-screen">
             <button @click="submit" class="flex order signin mv_w-screen">
               <div class="signin_text">Сохранить</div>
@@ -165,6 +171,14 @@
 </template>
 <script>
 import Icons from "@/components/icons.vue";
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}
 export default {
   components: { Icons },
   data() {
@@ -173,9 +187,35 @@ export default {
       tab: "myorder",
       form3: {},
       name: null,
+      fileList: [],
       orders: [],
       loading: false,
       img: null,
+      previewVisible: false,
+      previewImage: "",
+      rules: {
+        title: [
+          {
+            required: true,
+            message: "This field is required",
+            trigger: "blur",
+          },
+        ],
+        desc: [
+          {
+            required: true,
+            message: "This field is required",
+            trigger: "blur",
+          },
+        ],
+      },
+      form: {
+        organization: "",
+        phone_number: "",
+        address: "",
+        business_avatar: "",
+        active: true,
+      },
     };
   },
   methods: {
@@ -211,30 +251,40 @@ export default {
       this.img = URL.createObjectURL(e.target.files[0]);
       this.form3.image = e.target.files[0];
     },
-
-    async sendForm2() {
-      let user =
-        localStorage &&
-        localStorage.getItem("user") &&
-        JSON.parse(localStorage.getItem("user"));
-      if (user) {
-        let data = { name: this.name };
-        await this.$axios
-          .put("/api/users/" + this.$store.state.user._id, data)
-          .then((res) => {
-            if (res && res.data) {
-              this.$message.success("Успешно");
-              setTimeout(() => {
-                this.$router.go();
-              }, 1000);
-            } else {
-              this.$message.error("Что-то пошло не так");
-            }
-          });
-        this.$router.go();
+    async handleChange({ fileList }) {
+      this.fileList = fileList;
+      if (fileList[0]?.response?.upload_url) {
+        this.form.business_avatar = fileList[0]?.response?.upload_url;
       }
     },
-    submit() {},
+    handleCancel() {
+      this.previewVisible = false;
+    },
+    async handlePreview(file) {
+      if (!file.url && !file.preview) {
+        file.preview = await getBase64(file.originFileObj);
+      }
+      this.previewImage = file.url || file.preview;
+      this.previewVisible = true;
+    },
+    submit() {
+      this.$refs.ruleFormProfile.validate((valid) => {
+        if (valid) {
+          this.__PROFILE_UPDATE();
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    async __PROFILE_UPDATE() {
+      try {
+        const data = await this.$store.dispatch("fetchAuth/postProfileUpdate", this.form);
+        // this.visible = true;
+      } catch (e) {
+        // this.visibleError = true;
+      }
+    },
   },
   async mounted() {
     console.log("sdfsf");
@@ -244,23 +294,23 @@ export default {
       localStorage &&
       localStorage.getItem("access_token") &&
       JSON.parse(localStorage.getItem("access_token"));
-    this.user &&
-      (await this.$axios.get("/api/users/" + this.user.id).then((res) => {
-        this.$store.state.user = res && res.data && res.data.result;
-      }));
-    this.$store.state.user ? (this.name = this.$store.state.user.name) : "";
+    // this.user &&
+    //   (await this.$axios.get("/api/users/" + this.user.id).then((res) => {
+    //     this.$store.state.user = res && res.data && res.data.result;
+    //   }));
+    // this.$store.state.user ? (this.name = this.$store.state.user.name) : "";
 
-    if (this.$store.state.user && this.$store.state.user.organization) {
-      this.form3.name = this.$store.state.user.organization.name;
-      this.form3.phoneNumber = this.$store.state.user.organization.phoneNumber;
-      this.form3.address = this.$store.state.user.organization.address;
-    }
-    this.user &&
-      (await this.$axios
-        .get("/api/users/" + this.$store.state.user._id + "/orders")
-        .then((res) => {
-          this.orders = res && res.data && res.data.result;
-        }));
+    // if (this.$store.state.user && this.$store.state.user.organization) {
+    //   this.form3.name = this.$store.state.user.organization.name;
+    //   this.form3.phoneNumber = this.$store.state.user.organization.phoneNumber;
+    //   this.form3.address = this.$store.state.user.organization.address;
+    // }
+    // this.user &&
+    //   (await this.$axios
+    //     .get("/api/users/" + this.$store.state.user._id + "/orders")
+    //     .then((res) => {
+    //       this.orders = res && res.data && res.data.result;
+    //     }));
 
     this.loading = true;
     console.log("user");
@@ -290,3 +340,24 @@ export default {
   },
 };
 </script>
+<style lang="css">
+.profile-upload .ant-upload-select-picture-card {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+}
+.uplaod-svg {
+  width: 17px;
+  height: 17px;
+}
+.profile-upload .ant-upload-list-picture-card .ant-upload-list-item {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  padding: 0 !important;
+  overflow: hidden;
+}
+.weather-drop__mobile h1 {
+  font-size: 44px;
+}
+</style>

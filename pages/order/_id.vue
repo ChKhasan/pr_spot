@@ -1,6 +1,6 @@
 <template>
   <div class="section">
-    <div class="container" v-if="true">
+    <div class="container_xl" v-if="true">
       <div class="form">
         <div class="breadcrubms mv_w">
           <nuxt-link to="/order">Заказы</nuxt-link><span class="opacity-05">/</span>

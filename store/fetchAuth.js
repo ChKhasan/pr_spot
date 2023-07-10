@@ -28,4 +28,18 @@ export const actions = {
     );
     return res;
   },
+  async postProfileUpdate({}, payload) {
+    const res = await this.$axios.$post(
+      `https://prweb.pythonanywhere.com/api/auth/create_business`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            localStorage.getItem("access_token")
+          )}`,
+        },
+      }
+    );
+    return res;
+  },
 };

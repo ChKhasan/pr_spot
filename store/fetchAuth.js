@@ -42,4 +42,18 @@ export const actions = {
     );
     return res;
   },
+  async putProfileUpdate({}, payload) {
+    const res = await this.$axios.$put(
+      `https://prweb.pythonanywhere.com/api/auth/update_business`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            localStorage.getItem("access_token")
+          )}`,
+        },
+      }
+    );
+    return res;
+  },
 };

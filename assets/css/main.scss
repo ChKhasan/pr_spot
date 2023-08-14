@@ -21,6 +21,11 @@
 body {
   background: #f5f5f5 !important;
 }
+.disabled-btn {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 .spin__container {
   display: flex;
   align-items: center;
@@ -869,6 +874,10 @@ button {
     color: white;
   }
 }
+.cancel {
+  background: #FF3333 !important;
+}
+
 .menu-mobile {
   position: absolute;
   visibility: hidden;

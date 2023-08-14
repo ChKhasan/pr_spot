@@ -113,11 +113,20 @@
                     class="flex gap-16 mv_flex-col-rev mv_w-screen mv_mt-24 items-center"
                   >
                     <button
+                      v-if="true"
                       @click="chooseOffer(el.id)"
-                      class="flex order accept mv_w-screen"
+                      disabled
+                      class="flex order accept mv_w-screen disabled-btn"
                     >
                       <div class="show_text">Принять</div>
                       <Icons color="#FFFFFF" icon="success" />
+                    </button>
+                    <button
+                      v-else
+                      @click="chooseOffer(el.id)"
+                      class="flex order accept cancel mv_w-screen"
+                    >
+                      <div class="show_text">Отменить заказ</div>
                     </button>
                   </div>
                 </div>

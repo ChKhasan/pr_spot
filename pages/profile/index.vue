@@ -216,6 +216,7 @@ export default {
         business_avatar: "",
         active: true,
       },
+      accountStatus: false,
     };
   },
   methods: {
@@ -269,24 +270,61 @@ export default {
     },
     submit() {
       this.$refs.ruleFormProfile.validate((valid) => {
-        if (valid) {
-          this.__PROFILE_UPDATE();
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
+        valid ? this.__PROFILE_UPDATE() : false;
       });
     },
     async __PROFILE_UPDATE() {
       try {
-        const data = await this.$store.dispatch("fetchAuth/postProfileUpdate", this.form);
+        const data = await this.$store.dispatch(
+          this.accountStatus
+            ? "fetchAuth/putProfileUpdate"
+            : "fetchAuth/postProfileUpdate",
+          this.form
+        );
         // this.visible = true;
       } catch (e) {
         // this.visibleError = true;
       }
     },
+    async __GET_USER_INFO() {
+      try {
+        const data = await this.$store.dispatch("fetchAuth/getProfileInfo");
+        this.$store.commit("getUserInfo", data);
+        if (Object.keys(data?.business_profile).length > 0) {
+          this.accountStatus = true;
+        }
+        this.form.address = data?.business_profile.address;
+        this.form.organization = data?.business_profile.organization;
+        this.form.phone_number = data?.business_profile.phone_number;
+        this.fileList = [
+          {
+            uid: "-1",
+            name: "image.png",
+            status: "done",
+            oldImg: true,
+            url: data?.business_profile?.business_avatar,
+          },
+        ];
+      } catch (e) {
+        if (e.response.status == 401) {
+          this.__REFRESH_TOKEN();
+        }
+      }
+    },
+    async __REFRESH_TOKEN() {
+      try {
+        const data = await this.$store.dispatch("fetchAuth/postRefreshToken");
+        localStorage.setItem("access_token", JSON.stringify(data.access));
+        localStorage.setItem("refresh_token", JSON.stringify(data.refresh));
+        this.__GET_USER_INFO();
+      } catch (e) {
+        localStorage.remove("access_token");
+        localStorage.remove("refresh_token");
+      }
+    },
   },
   async mounted() {
+    this.__GET_USER_INFO();
     console.log("sdfsf");
     this.loading = false;
     this.tab = this.$route.query.tab || "myorder";

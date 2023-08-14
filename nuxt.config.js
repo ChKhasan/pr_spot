@@ -56,7 +56,7 @@ export default {
       axios.defaults.withCredentials = true;
     },
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: "https://prspot.uz/",
+    baseURL: "https://prspot.uz/api",
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
